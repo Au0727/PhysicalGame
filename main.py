@@ -1,6 +1,6 @@
 from cvzone.HandTrackingModule import HandDetector
 import cv2
-import
+# import pygame
 
 class Detection:
     def __init__(self):
@@ -61,4 +61,8 @@ class Detection:
         cv2.imshow("Image", img)
 
         # Keep the window open and update it for each frame; wait for 1 millisecond between frames
-        cv2.waitKey(2)
+        cv2.waitKey(5)
+
+d = Detection()
+while True:
+    d.detect_hands()
