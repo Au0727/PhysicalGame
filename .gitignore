@@ -1,2 +1,6 @@
-/.venv
-/.idea
+.venv
+.idea
+/temp.py
+test1.py
+history.txt
+

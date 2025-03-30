@@ -1,14 +1,13 @@
 # import math
 # import random
+import random
 import time
 
-import pygame
-import random
-# import tkinter as tk
-# from tkinter import messagebox
-from cvzone.HandTrackingModule import HandDetector
 import cv2
-
+import pygame
+# import tkinter as tk
+from tkinter import messagebox
+from cvzone.HandTrackingModule import HandDetector
 
 width = 500
 height = 500
@@ -310,7 +309,11 @@ def game_main():
         if headPos[0] >= 20 or headPos[0] < 0 or headPos[1] >= 20 or headPos[1] < 0:
             print("Score:", len(s.body))
             s.reset((10, 10))
-            # pygame.quit()
+            messagebox.showinfo('GAME OVER',f"You died because of colliding with the boundaries!\n"
+                                            f"Score:{len(s.body)}")
+            with open("history.txt", 'a+') as f:
+                f.write(f'\n score:{len(s.body)} at {time.time()}')
+            pygame.quit()
         if s.body[0].pos == snack.pos:
             s.addCube()
             snack = Cube(randomSnack(rows, s), color=(0, 255, 0))
@@ -319,7 +322,11 @@ def game_main():
             if s.body[x].pos in list(map(lambda z: z.pos, s.body[x + 1:])):
                 print("Score:", len(s.body))
                 s.reset((10, 10))
-                # pygame.quit()
+                messagebox.showinfo('GAME OVER', f"You died due to biting yourself!\n"
+                                                 f"Score:{len(s.body)}")
+                with open("history.txt", 'a+') as f:
+                    f.write(f'\n score:{len(s.body)} at {time.time()}')
+                pygame.quit()
                 break
 
         redrawWindow(finger_pos)
